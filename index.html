@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador de Aforo Completo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <h1>Contador de Aforo Completo</h1>
+      <p>Pulsa las teclas asignadas para sumar rápidamente sin tocar el ratón</p>
+    </header>
+
+    <!-- Panel de Teclas Configurables -->
+    <div class="config-panel">
+      <div class="key-config-group">
+        <label>Hombre:</label>
+        <button class="key-badge-btn" id="btnKey_male" onclick="startListening('male')">Flecha Izq</button>
+      </div>
+
+      <div class="key-config-group">
+        <label>Mujer:</label>
+        <button class="key-badge-btn" id="btnKey_female" onclick="startListening('female')">Flecha Der</button>
+      </div>
+
+      <div class="key-config-group">
+        <label> Niño:</label>
+        <button class="key-badge-btn" id="btnKey_boy" onclick="startListening('boy')">Flecha Arriba</button>
+      </div>
+
+      <div class="key-config-group">
+        <label>Niña:</label>
+        <button class="key-badge-btn" id="btnKey_girl" onclick="startListening('girl')">Flecha Abajo</button>
+      </div>
+
+      <div class="key-config-group">
+        <label>Mascota:</label>
+        <button class="key-badge-btn" id="btnKey_pet" onclick="startListening('pet')">Tecla M</button>
+      </div>
+    </div>
+
+    <!-- Grid de Tarjetas -->
+    <div class="counters-grid">
+      
+      <!-- HOMBRE -->
+      <div class="counter-card male" id="card_male">
+        <div class="card-title male"> Hombres</div>
+        <div class="avatar-container">
+          <svg class="avatar-svg" viewBox="0 0 120 120" fill="none">
+            <circle cx= "60" cy="60" r="56" fill="#1e3a8a" fill-opacity="0.3" stroke="#3b82f6" stroke-width="3"/>
+            <circle cx="60" cy="45" r="20" fill="#60a5fa"/>
+            <circle cx="53" cy="42" r="2.5" fill="#0f172a"/>
+            <circle cx="67" cy="42" r="2.5" fill="#0f172a"/>
+            <path d="M 52 50 Q 60 57 68 50" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M 32 95 C 32 70, 88 70, 90 95 W" fill="#3b82f6"/>
+            <path d="M 52 63 L 68 63 L 68 70 L 52 70 Z" fill="#60a5fa"/>
+          </svg>
+        </div>
+        <div class="count-number" id="count_male">0</div>
+        <div class="manual-controls">
+          <button class="btn-adjust" onclick="adjustCount('male', -1)">-1</button>
+          <button class="btn-adjust" onclick="adjustCount('male', 1)">+1</button>
+        </div>
+      </div>
+
+      <!-- MUJER -->
+      <div class="counter-card female" id="card_female">
+        <div class="card-title female">Mujeres</div>
+        <div class="avatar-container">
+          <svg class="avatar-svg" viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="56" fill="#831843" fill-opacity="0.3" stroke="#ec4899" stroke-width="3"/>
+            <path d="M 32 45 C 32 85, 88 85, 88 45 C 88 20, 32 20, 32 50 Z" fill="#db2777"/>
+            <circle cx="60" cy="45" r="20" fill="#f472b6"/>
+            <circle cx="53" cy="42" r="2.5" fill="#0f172a"/>
+            <circle cx="67" cy="42" r="2.5" fill="#0f172a"/>
+            <path d="M 52 50 Q 60 57 68 50" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M 34 95 C 34 70, 86 70, 86 95 Z" fill="#ec4899"/>
+            <path d="M 52 63 L 68 63 L 68 70 L 52 70 Z" fill="#f472b6"/>
+          </svg>
+        </div>
+        <div class="count-number" id="count_female">0</div>
+        <div class="manual-controls">
+          <button class="btn-adjust" onclick="adjustCount('female', -1)">-1</button>
+          <button class="btn-adjust" onclick="adjustCount('female', 1)">+1</button>
+        </div>
+      </div>
+
+      <!-- NIÑO -->
+      <div class="counter-card boy" id="card_boy">
+        <div class="card-title boy">Niños</div>
+        <div class="avatar-container">
+          <svg class="avatar-svg" viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="56" fill="#164e63" fill-opacity="0.3" stroke="#06b6d4" stroke-width="3"/>
+            <circle cx="60" cy="48" r="17" fill="#67e8f9"/>
+            <circle cx="54" cy="46" r="2.2" fill="#0f172a"/>
+            <circle cx="66" cy="46" r="2.2" fill="#0f172a"/>
+            <path d="M 53 53 Q 60 59 67 53" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M 40 45 C 40 30, 80 30, 80 45 Z" fill="#0891b2"/>
+            <path d="M 32 46 C 45 42, 65 42, 70 46 L 32 48 Z" fill="#06b6d4"/>
+            <path d="M 36 95 C 36 72, 84 72, 84 95 Z" fill="#0891b2"/>
+          </svg>
+        </div>
+        <div class="count-number" id="count_boy">0</div>
+        <div class="manual-controls">
+          <button class="btn-adjust" onclick="adjustCount('boy', -1)">-1</button>
+          <button class="btn-adjust" onclick="adjustCount('boy', 1)">+1</button>
+        </div>
+      </div>
+
+      <!-- NIÑA -->
+      <div class="counter-card girl" id="card_girl">
+        <div class="card-title girl"> Niñas</div>
+        <div class="avatar-container">
+          <svg class="avatar-svg" viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="56" fill="#581c87" fill-opacity="0.3" stroke="#a855f7" stroke-width="3"/>
+            <circle cx="36" cy="42" r="10" fill="#9333ea"/>
+            <circle cx="84" cy="42" r="10" fill="#9333ea"/>
+            <circle cx="60" cy="48" r="17" fill="#e9d5ff"/>
+            <circle cx="54" cy="46" r="2.2" fill="#0f172a"/>
+            <circle cx="66" cy="46" r="2.2" fill="#0f172a"/>
+            <path d="M 53 53 Q 60 59 67 53" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M 43 42 C 50 35, 70 35, 77 42 Z" fill="#9333ea"/>
+            <circle cx="42" cy="42" r="3" fill="#f43f5e"/>
+            <circle cx="78" cy="42" r="3" fill="#f43f5e"/>
+            <path d="M 38 95 C 38 72, 82 72, 82 95 Z" fill="#a855f7"/>
+          </svg>
+        </div>
+        <div class="count-number" id="count_girl">0</div>
+        <div class="manual-controls">
+          <button class="btn-adjust" onclick="adjustCount('girl', -1)">-1</button>
+          <button class="btn-adjust" onclick="adjustCount('girl', 1)">+1</button>
+        </div>
+      </div>
+
+      <!-- MASCOTA -->
+      <div class="counter-card pet" id="card_pet">
+        <div class="card-title pet"><span> Mascotas</div>
+        <div class="avatar-container">
+          <svg class="avatar-svg" viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="56" fill="#78350f" fill-opacity="0.3" stroke="#f59e0b" stroke-width="3"/>
+            <path d="M 32 35 L 45 60 L 25 55 Z" fill="#d97706"/>
+            <path d="M 88 35 L 75 60 L 95 55 Z" fill="#d97706"/>
+            <ellipse cx="60" cy="60" rx="26" ry="22" fill="#fef3c7"/>
+            <circle cx="50" cy="55" r="3" fill="#0f172a"/>
+            <circle cx="70" cy="55" r="3" fill="#0f172a"/>
+            <ellipse cx="60" cy="65" rx="8" ry="6" fill="#fde68a"/>
+            <ellipse cx="60" cy="63" rx="4" ry="3" fill="#0f172a"/>
+            <path d="M 60 66 L 60 70" stroke="#0f172a" stroke-width="1.5"/>
+            <path d="M 58 70 Q 60 75 62 70 Z" fill="#f43f5e"/>
+            <circle cx="60" cy="90" r="4" fill="#f59e0b"/>
+            <circle cx="53" cy="85" r="2" fill="#f59e0b"/>
+            <circle cx="67" cy="85" r="2" fill="#f59e0b"/>
+            <circle cx="57" cy="82" r="2" fill="#f59e0b"/>
+            <circle cx="63" cy="82" r="2" fill="#f59e0b"/>
+          </svg>
+        </div>
+        <div class="count-number" id="count_pet">0</div>
+        <div class="manual-controls">
+          <button class="btn-adjust" onclick="adjustCount('pet', -1)">-1</button>
+          <button class="btn-adjust" onclick="adjustCount('pet', 1)">+1</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Barra Inferior (Totales y Controles) -->
+    <div class="total-bar">
+      <div class="total-summary-group">
+        <div class="total-info">
+          <h3>Total Personas</h3>
+          <p id="totalPersons">0</p>
+        </div>
+
+        <div class="total-info divider">
+          <h3>Total Mascotas</h3>
+          <p id="totalPets">0</p>
+        </div>
+
+        <div class="total-info highlight">
+          <h3>Total Aforo</h3>
+          <p id="totalCount">0</p>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-action" onclick="undoLastAction()">↩ Deshacer (Ctrl+Z)</button>
+        <button class="btn-action btn-danger" onclick="resetAll()">🗑 Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="last-entry-toast" id="toast">+1 Registrado</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
